@@ -95,8 +95,8 @@ export const PackageCard = ({ pkg }: { pkg: Package }) => {
               <span className="font-bold">{pkg.rating}</span>
             </div>
             <div className="text-lg font-bold text-foreground">
-              <span className="text-sm font-normal">From ₹</span>
-              {pkg.price}
+              <span className="text-sm font-normal" style={{ fontFamily: "'Noto Sans', 'Roboto', 'Arial', 'Segoe UI', sans-serif" }}>From ₹</span>
+              <span style={{ fontFamily: "'Noto Sans', 'Roboto', 'Arial', 'Segoe UI', sans-serif" }}>{pkg.price}</span>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export const PackageCard = ({ pkg }: { pkg: Package }) => {
                   className="flex-1 text-xs"
                   onClick={() => addToCart(pkg, 1)}
                 >
-                  Add to Cart
+                  Book Now
                 </Button>
               )}
             </div>
