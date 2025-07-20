@@ -254,19 +254,16 @@ export default function SubscriptionPage() {
                 <CardTitle className="text-xl">{plan.name}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
                 <div className="mt-4">
-                  <span className="text-3xl font-bold">
-                    ₹{price.toLocaleString()}
-                  </span>
+                  <span className="text-3xl font-bold rupee-font">₹{price.toLocaleString()}</span>
                   <span className="text-gray-600">
                     /{billingCycle === "yearly" ? "year" : "month"}
                   </span>
                   {billingCycle === "yearly" && plan.id !== "trial" && (
                     <div className="text-sm text-green-600 mt-1">
-                      Save ₹
-                      {(
+                      Save <span className="rupee-font">₹</span>{(
                         plan.monthlyPrice * 12 -
                         plan.yearlyPrice
-                      ).toLocaleString()}{" "}
+                      ).toLocaleString()} {" "}
                       annually
                     </div>
                   )}

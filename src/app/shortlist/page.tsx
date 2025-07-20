@@ -19,7 +19,7 @@ const ShortlistHeader = () => (
         </Button>
       </Link>
       <h1 className="text-xl font-bold text-foreground font-headline">
-        My Shortlist
+        Wishlist
       </h1>
       <div className="w-10"></div>
     </div>
@@ -41,7 +41,7 @@ export default function ShortlistPage() {
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
                 <Heart className="h-16 w-16 text-muted-foreground mb-4" />
                 <h2 className="text-2xl font-bold mb-2">
-                  Sign in to view your shortlist
+                  Sign in to view your wishlist
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-md">
                   Save your favorite travel packages and access them anytime by
@@ -66,7 +66,7 @@ export default function ShortlistPage() {
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
                 <Heart className="h-16 w-16 text-muted-foreground mb-4" />
                 <h2 className="text-2xl font-bold mb-2">
-                  Your shortlist is empty
+                  Your wishlist is empty
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-md">
                   Start exploring our amazing travel packages and save the ones
@@ -116,7 +116,7 @@ export default function ShortlistPage() {
             <div className="mt-8 p-6 bg-muted rounded-lg text-center">
               <h3 className="text-lg font-bold mb-2">Ready to book?</h3>
               <p className="text-muted-foreground mb-4">
-                Compare your shortlisted packages and start planning your
+                Compare your wishlisted packages and start planning your
                 adventure.
               </p>
               <Link href="/packages">

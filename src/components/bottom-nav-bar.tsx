@@ -11,7 +11,7 @@ export const BottomNavBar = () => {
   const navItems = [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/my-trips", icon: Briefcase, label: "My Trips" },
-    { href: "/shortlist", icon: Heart, label: "Shortlist" },
+    { href: "/shortlist", icon: Heart, label: "Wishlist" },
     { href: "/honeymoon", icon: Gem, label: "Honeymoon" },
   ];
 

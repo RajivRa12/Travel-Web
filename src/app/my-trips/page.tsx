@@ -135,7 +135,7 @@ const BookingCard = ({ booking }: { booking: (typeof mockBookings)[0] }) => {
               </div>
               <div className="text-right">
                 <p className="font-bold">
-                  ₹{booking.totalAmount.toLocaleString()}
+                  <span className="rupee-font">₹{booking.totalAmount.toLocaleString()}</span>
                 </p>
                 <p className="text-muted-foreground">
                   Booking #{booking.confirmation}
@@ -144,14 +144,26 @@ const BookingCard = ({ booking }: { booking: (typeof mockBookings)[0] }) => {
             </div>
 
             <div className="flex items-center gap-2 pt-1">
-              <Button variant="outline" size="sm" className="h-7 text-xs">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-7 text-xs"
+                onClick={() => alert('E-Ticket download coming soon!')}
+              >
                 <Download className="h-3 w-3 mr-1" />
                 E-Ticket
               </Button>
               {agent && (
-                <Button variant="outline" size="sm" className="h-7 text-xs">
-                  <MessageSquare className="h-3 w-3 mr-1" />
-                  Contact {agent.name}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs"
+                  asChild
+                >
+                  <a href={`mailto:${agent.email}`}>
+                    <MessageSquare className="h-3 w-3 mr-1" />
+                    Contact {agent.name}
+                  </a>
                 </Button>
               )}
               {booking.status === "completed" && !booking.review && (
@@ -225,10 +237,10 @@ const DashboardStats = () => {
       <Card>
         <CardContent className="p-4 text-center">
           <div className="flex items-center justify-center w-10 h-10 bg-green-100 rounded-full mx-auto mb-2">
-            <ShoppingCart className="h-5 w-5 text-green-600" />
+            <Heart className="h-5 w-5 text-green-600" />
           </div>
           <p className="text-2xl font-bold">{getTotalItems()}</p>
-          <p className="text-xs text-muted-foreground">Items in Cart</p>
+          <p className="text-xs text-muted-foreground">Items in Wishlist</p>
         </CardContent>
       </Card>
     </div>
@@ -237,6 +249,7 @@ const DashboardStats = () => {
 
 export default function MyTripsPage() {
   const { user } = useAuth();
+  const { addToWishlist, isInWishlist } = useWishlist();
 
   if (!user) {
     return (
@@ -347,18 +360,6 @@ export default function MyTripsPage() {
             <div className="mt-8 space-y-4">
               <h3 className="text-lg font-bold">Quick Actions</h3>
               <div className="grid grid-cols-2 gap-3">
-                <Link href="/shortlist">
-                  <Button variant="outline" className="w-full justify-start">
-                    <Heart className="h-4 w-4 mr-2" />
-                    My Wishlist
-                  </Button>
-                </Link>
-                <Link href="/cart">
-                  <Button variant="outline" className="w-full justify-start">
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    My Cart
-                  </Button>
-                </Link>
                 <Link href="/profile">
                   <Button variant="outline" className="w-full justify-start">
                     <Users className="h-4 w-4 mr-2" />

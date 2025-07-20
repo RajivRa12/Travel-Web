@@ -18,7 +18,6 @@ import {
   Bell,
   CheckCircle,
   Megaphone,
-  ShoppingCart,
   ShieldCheck,
 } from "lucide-react";
 
@@ -78,6 +77,8 @@ import { useCart } from "@/components/context/cart-context";
 import { PackageCard } from "@/components/package-card";
 import { FilterSheet } from "@/components/filter-sheet";
 import { BottomNavBar } from "@/components/bottom-nav-bar";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Package = (typeof allPackages)[0];
 
@@ -134,15 +135,10 @@ const AppHeader = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link href="/cart" passHref>
+          <Link href="/shortlist" passHref>
             <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
-              <span className="sr-only">Cart</span>
+              <Heart className="h-5 w-5" />
+              <span className="sr-only">Wishlist</span>
             </Button>
           </Link>
 
@@ -228,6 +224,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [searchResults, setSearchResults] = React.useState<Package[]>([]);
   const [showSearchResults, setShowSearchResults] = React.useState(false);
+  const [open, setOpen] = useState<null | "about" | "contact" | "terms" | "privacy">(null);
 
   const handleSearch = React.useCallback((query: string) => {
     setSearchQuery(query);
@@ -327,9 +324,7 @@ export default function Home() {
                             {pkg.destination} • {pkg.duration}
                           </p>
                         </div>
-                        <span className="text-sm font-bold text-primary">
-                          ₹{pkg.price}
-                        </span>
+                        <span className="text-sm font-bold text-primary rupee-font">₹{pkg.price}</span>
                       </Link>
                     ))}
                     {searchResults.length > 5 && (
@@ -518,26 +513,50 @@ export default function Home() {
             {/* Guest User Benefits Section - Only show to non-authenticated users */}
             <GuestBenefitsSection />
 
-            <footer className="p-6 text-center text-sm text-muted-foreground hidden md:block">
-              <div className="flex justify-center gap-6 mb-4">
-                <a href="#" className="hover:text-primary">
-                  About Us
-                </a>
-                <a href="#" className="hover:text-primary">
-                  Contact
-                </a>
-                <a href="#" className="hover:text-primary">
-                  Terms & Conditions
-                </a>
-                <a href="#" className="hover:text-primary">
-                  Privacy Policy
-                </a>
-              </div>
-              <p>
-                &copy; {new Date().getFullYear()} Roam Southeast. All rights
-                reserved.
-              </p>
+            <footer className="flex flex-wrap justify-center gap-4 py-8">
+              <Button variant="link" onClick={() => setOpen("about")}>About Us</Button>
+              <Button variant="link" onClick={() => setOpen("contact")}>Contact</Button>
+              <Button variant="link" onClick={() => setOpen("terms")}>Terms & Conditions</Button>
+              <Button variant="link" onClick={() => setOpen("privacy")}>Privacy Policy</Button>
             </footer>
+
+            {/* Modals for each section */}
+            <Dialog open={open === "about"} onOpenChange={() => setOpen(null)}>
+              <DialogContent>
+                <DialogTitle className="!text-black">About Us</DialogTitle>
+                <p>
+                  At Your Company, we specialize in creating seamless travel experiences by connecting travelers directly with trusted destination service providers. Our goal is to provide transparent pricing, rich itineraries, and impeccable customer service to help you explore the world effortlessly.
+                </p>
+              </DialogContent>
+            </Dialog>
+            <Dialog open={open === "contact"} onOpenChange={() => setOpen(null)}>
+              <DialogContent>
+                <DialogTitle className="!text-black">Contact</DialogTitle>
+                <p>
+                  We are here to assist you with any questions or support needs. Reach out to us via:<br/>
+                  <strong>Email:</strong> support@yourcompany.com<br/>
+                  <strong>Phone:</strong> +91-12345-67890<br/>
+                  <strong>Address:</strong> 123 Travel St, Your City, India<br/>
+                  Our customer service is available Monday to Saturday, 9:00 AM to 6:00 PM IST.
+                </p>
+              </DialogContent>
+            </Dialog>
+            <Dialog open={open === "terms"} onOpenChange={() => setOpen(null)}>
+              <DialogContent>
+                <DialogTitle className="!text-black">Terms & Conditions</DialogTitle>
+                <p>
+                  By using our platform, you agree to our terms which include responsible use of the site, accurate personal information submission, payment commitments, and compliance with local travel regulations. We reserve the right to modify these terms at any time; continued use means acceptance.
+                </p>
+              </DialogContent>
+            </Dialog>
+            <Dialog open={open === "privacy"} onOpenChange={() => setOpen(null)}>
+              <DialogContent>
+                <DialogTitle className="!text-black">Privacy Policy</DialogTitle>
+                <p>
+                  Your privacy is paramount. We collect personal data only to facilitate bookings and customer support. We do not share your information with third parties without your consent, and we implement industry-standard security measures to protect your data.
+                </p>
+              </DialogContent>
+            </Dialog>
           </main>
 
           <BottomNavBar />

@@ -36,7 +36,7 @@ import { LoginDialog } from "@/components/auth/login-dialog";
 const ProfileHeader = () => (
   <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
     <div className="mx-auto flex max-w-2xl items-center justify-between p-4">
-      <Link href="/my-trips" passHref>
+      <Link href="/" passHref>
         <Button variant="ghost" size="icon">
           <ArrowLeft className="h-5 w-5" />
           <span className="sr-only">Back</span>

@@ -159,6 +159,9 @@ export function PackageDetailsClient({
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const [travelers, setTravelers] = React.useState(2);
   const [selectedDate, setSelectedDate] = React.useState("");
+  const [showPayment, setShowPayment] = React.useState(false);
+  const [paymentName, setPaymentName] = React.useState("");
+  const [paymentEmail, setPaymentEmail] = React.useState("");
 
   const handleWishlistToggle = () => {
     const success = toggleWishlist(pkg.id);
@@ -191,8 +194,8 @@ export function PackageDetailsClient({
 
     addToCart(pkg, travelers, selectedDate);
     toast({
-      title: "Added to Cart",
-      description: `"${pkg.title}" for ${travelers} traveler${travelers !== 1 ? "s" : ""} has been added to your cart.`,
+      title: "Booking Confirmed",
+      description: `\"${pkg.title}\" for ${travelers} traveler${travelers !== 1 ? "s" : ""} has been booked!`,
     });
   };
 
@@ -679,11 +682,10 @@ export function PackageDetailsClient({
                 <Button
                   size="lg"
                   className="flex-1 text-lg"
-                  onClick={handleAddToCart}
+                  onClick={() => setShowPayment(true)}
                 >
                   <ShieldCheck className="mr-2 h-5 w-5" />
-                  Add to Cart - ₹
-                  {(
+                  Book Now - <span className="rupee-font">₹</span>{(
                     parseInt(pkg.price.replace(/,/g, "")) * travelers
                   ).toLocaleString()}
                 </Button>
@@ -749,6 +751,36 @@ export function PackageDetailsClient({
               {currentImageIndex + 1} / {packageImages.length}
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showPayment} onOpenChange={setShowPayment}>
+        <DialogContent>
+          <DialogTitle>Enter Payment Details</DialogTitle>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full border rounded p-2"
+              value={paymentName}
+              onChange={e => setPaymentName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full border rounded p-2"
+              value={paymentEmail}
+              onChange={e => setPaymentEmail(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Payment Details (Card/UPI)"
+              className="w-full border rounded p-2"
+            />
+          </div>
+          <DialogFooter>
+            <Button onClick={() => { setShowPayment(false); alert('Payment processed!'); }}>Pay Now</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

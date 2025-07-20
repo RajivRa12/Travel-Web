@@ -369,20 +369,12 @@ body {
   left: -3rem;
 }
 
-.-right-1 {
-  right: -.25rem;
-}
-
 .-right-12 {
   right: -3rem;
 }
 
 .-right-2 {
   right: -.5rem;
-}
-
-.-top-1 {
-  top: -.25rem;
 }
 
 .-top-12 {
@@ -1024,6 +1016,10 @@ body {
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-sm {
+  max-width: 24rem;
 }
 
 .flex-1 {
@@ -2079,7 +2075,7 @@ body {
 }
 
 .font-body, .font-headline {
-  font-family: PT Sans, sans-serif;
+  font-family: PT Sans, Noto Sans, Roboto, Arial, Segoe UI, sans-serif;
 }
 
 .font-mono {
@@ -2181,6 +2177,11 @@ body {
 
 .tracking-widest {
   letter-spacing: .1em;
+}
+
+.\!text-black {
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1)) !important;
 }
 
 .text-accent {
@@ -2710,6 +2711,10 @@ body {
   animation-timing-function: linear;
 }
 
+.rupee-font {
+  font-family: Noto Sans, Roboto, Arial, Segoe UI, sans-serif;
+}
+
 .file\:border-0::file-selector-button {
   border-width: 0;
 }
@@ -2896,10 +2901,6 @@ body {
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-primary:hover {
-  color: hsl(var(--primary));
 }
 
 .hover\:text-primary-foreground:hover {

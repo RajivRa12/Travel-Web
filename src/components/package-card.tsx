@@ -110,13 +110,11 @@ export const PackageCard = ({ pkg }: { pkg: Package }) => {
                   </Button>
                 </Link>
               ) : (
-                <Button
-                  size="sm"
-                  className="flex-1 text-xs"
-                  onClick={() => addToCart(pkg, 1)}
-                >
-                  Book Now
-                </Button>
+                <Link href={`/payment/${pkg.id}`} passHref>
+                  <Button size="sm" className="flex-1 text-xs">
+                    Book Now
+                  </Button>
+                </Link>
               )}
             </div>
           )}

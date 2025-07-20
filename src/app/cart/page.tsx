@@ -27,7 +27,7 @@ const CartHeader = () => (
         </Button>
       </Link>
       <h1 className="text-xl font-bold text-foreground font-headline">
-        My Cart
+        Add Wishlist
       </h1>
       <div className="w-10"></div>
     </div>
@@ -87,10 +87,9 @@ export default function CartPage() {
             <main className="flex-1 overflow-y-auto p-6">
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
                 <ShoppingCart className="h-16 w-16 text-muted-foreground mb-4" />
-                <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
+                <h2 className="text-2xl font-bold mb-2">Your wishlist is empty</h2>
                 <p className="text-muted-foreground mb-6 max-w-md">
-                  Browse our amazing travel packages and add the ones you love
-                  to your cart.
+                  Browse our amazing travel packages and add the ones you love to your wishlist.
                 </p>
                 <Link href="/packages">
                   <Button>Explore Packages</Button>
@@ -111,7 +110,7 @@ export default function CartPage() {
           <main className="flex-1 overflow-y-auto p-6 pb-32">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold font-headline">
-                {getTotalItems()} Item{getTotalItems() !== 1 ? "s" : ""} in Cart
+                {getTotalItems()} Item{getTotalItems() !== 1 ? "s" : ""} in Wishlist
               </h2>
               {items.length > 0 && (
                 <Button
@@ -210,18 +209,18 @@ export default function CartPage() {
 
                           <div className="text-right">
                             <p className="font-bold text-sm">
-                              ₹
-                              {(
+                              <span className="rupee-font">₹</span>
+                              <span className="rupee-font">{(
                                 parseInt(item.package.price.replace(/,/g, "")) *
                                 item.travelers *
                                 item.quantity
-                              ).toLocaleString()}
+                              ).toLocaleString()}</span>
                             </p>
                             <p className="text-xs text-muted-foreground">
-                              ₹
-                              {parseInt(
+                              <span className="rupee-font">₹</span>
+                              <span className="rupee-font">{parseInt(
                                 item.package.price.replace(/,/g, ""),
-                              ).toLocaleString()}{" "}
+                              ).toLocaleString()}</span> {" "}
                               per person
                             </p>
                           </div>
@@ -238,23 +237,18 @@ export default function CartPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>Subtotal:</span>
-                    <span>₹{getTotalPrice().toLocaleString()}</span>
+                    <span className="rupee-font">₹{getTotalPrice().toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Taxes & Fees:</span>
-                    <span>
-                      ₹{Math.round(getTotalPrice() * 0.18).toLocaleString()}
-                    </span>
+                    <span className="rupee-font">₹{Math.round(getTotalPrice() * 0.18).toLocaleString()}</span>
                   </div>
                   <div className="border-t pt-2">
                     <div className="flex justify-between font-bold text-lg">
                       <span>Total:</span>
-                      <span>
-                        ₹
-                        {(
-                          getTotalPrice() + Math.round(getTotalPrice() * 0.18)
-                        ).toLocaleString()}
-                      </span>
+                      <span className="rupee-font">₹{(
+                        getTotalPrice() + Math.round(getTotalPrice() * 0.18)
+                      ).toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
@@ -271,8 +265,7 @@ export default function CartPage() {
                 disabled={items.length === 0}
               >
                 <CreditCard className="mr-2 h-5 w-5" />
-                Proceed to Checkout - ₹
-                {(
+                Proceed to Checkout - <span className="rupee-font">₹</span>{(
                   getTotalPrice() + Math.round(getTotalPrice() * 0.18)
                 ).toLocaleString()}
               </Button>
