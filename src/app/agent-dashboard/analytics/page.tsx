@@ -204,7 +204,9 @@ export default function AnalyticsPage() {
                   {mockData.overview.totalViews.toLocaleString()}
                 </p>
                 <div
-                  className={`flex items-center text-sm ${getTrendColor(mockData.overview.viewsChange)}`}
+                  className={`flex items-center text-sm ${getTrendColor(
+                    mockData.overview.viewsChange
+                  )}`}
                 >
                   {getTrendIcon(mockData.overview.viewsChange)}
                   <span className="ml-1">
@@ -229,7 +231,9 @@ export default function AnalyticsPage() {
                   {mockData.overview.totalEnquiries.toLocaleString()}
                 </p>
                 <div
-                  className={`flex items-center text-sm ${getTrendColor(mockData.overview.enquiriesChange)}`}
+                  className={`flex items-center text-sm ${getTrendColor(
+                    mockData.overview.enquiriesChange
+                  )}`}
                 >
                   {getTrendIcon(mockData.overview.enquiriesChange)}
                   <span className="ml-1">
@@ -254,7 +258,9 @@ export default function AnalyticsPage() {
                   {mockData.overview.conversionRate}%
                 </p>
                 <div
-                  className={`flex items-center text-sm ${getTrendColor(mockData.overview.conversionChange)}`}
+                  className={`flex items-center text-sm ${getTrendColor(
+                    mockData.overview.conversionChange
+                  )}`}
                 >
                   {getTrendIcon(mockData.overview.conversionChange)}
                   <span className="ml-1">
@@ -279,7 +285,9 @@ export default function AnalyticsPage() {
                   {formatCurrency(mockData.overview.totalRevenue)}
                 </p>
                 <div
-                  className={`flex items-center text-sm ${getTrendColor(mockData.overview.revenueChange)}`}
+                  className={`flex items-center text-sm ${getTrendColor(
+                    mockData.overview.revenueChange
+                  )}`}
                 >
                   {getTrendIcon(mockData.overview.revenueChange)}
                   <span className="ml-1">

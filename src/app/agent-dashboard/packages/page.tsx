@@ -102,7 +102,7 @@ export default function PackageManagementPage() {
   const handleCreatePackage = () => {
     if (!canCreatePackage) {
       alert(
-        "You have reached your package limit. Please upgrade your plan to create more packages.",
+        "You have reached your package limit. Please upgrade your plan to create more packages."
       );
       return;
     }
@@ -261,7 +261,10 @@ function PackageList({ packages, onEdit, onDelete }: any) {
                     {pkg.rating}
                   </div>
                 </TableCell>
-                <TableCell>₹{pkg.price.toLocaleString()}</TableCell>
+                <TableCell>
+                  <span className="rupee-font">₹</span>
+                  {pkg.price.toLocaleString()}
+                </TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
                     <Button
@@ -327,7 +330,7 @@ function PackageForm({ package: pkg, onSave, onCancel }: any) {
     setFormData((prev) => ({
       ...prev,
       [field]: (prev[field as keyof typeof prev] as any[]).filter(
-        (_, i) => i !== index,
+        (_, i) => i !== index
       ),
     }));
   };
@@ -336,7 +339,7 @@ function PackageForm({ package: pkg, onSave, onCancel }: any) {
     setFormData((prev) => ({
       ...prev,
       [field]: (prev[field as keyof typeof prev] as any[]).map((item, i) =>
-        i === index ? value : item,
+        i === index ? value : item
       ),
     }));
   };

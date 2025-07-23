@@ -95,7 +95,9 @@ const AskAgentDialog = ({ agent, pkg }: { agent: Agent; pkg: Package }) => {
   const handleWhatsApp = () => {
     const phoneNumber = agent.phone.replace(/\D/g, ""); // Remove non-digits
     const defaultMessage = `Hi ${agent.name}! I'm interested in the "${pkg.title}" package. Could you please provide more details?`;
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      defaultMessage
+    )}`;
     window.open(whatsappURL, "_blank");
   };
 
@@ -176,7 +178,9 @@ export function PackageDetailsClient({
       const isNowWishlisted = isInWishlist(pkg.id);
       toast({
         title: isNowWishlisted ? "Added to Wishlist" : "Removed from Wishlist",
-        description: `"${pkg.title}" has been ${isNowWishlisted ? "added to" : "removed from"} your wishlist.`,
+        description: `"${pkg.title}" has been ${
+          isNowWishlisted ? "added to" : "removed from"
+        } your wishlist.`,
       });
     }
   };
@@ -195,7 +199,9 @@ export function PackageDetailsClient({
     addToCart(pkg, travelers, selectedDate);
     toast({
       title: "Booking Confirmed",
-      description: `\"${pkg.title}\" for ${travelers} traveler${travelers !== 1 ? "s" : ""} has been booked!`,
+      description: `\"${pkg.title}\" for ${travelers} traveler${
+        travelers !== 1 ? "s" : ""
+      } has been booked!`,
     });
   };
 
@@ -240,7 +246,7 @@ export function PackageDetailsClient({
 
   const prevImage = () => {
     setCurrentImageIndex(
-      (prev) => (prev - 1 + packageImages.length) % packageImages.length,
+      (prev) => (prev - 1 + packageImages.length) % packageImages.length
     );
   };
 
@@ -350,7 +356,7 @@ export function PackageDetailsClient({
   }: {
     icon: React.ElementType;
     label: string;
-    value: string;
+    value: string | React.ReactNode;
     hint?: string;
   }) => (
     <Card className="shadow-md transition-all hover:shadow-lg hover:scale-105">
@@ -360,7 +366,15 @@ export function PackageDetailsClient({
         </div>
         <div>
           <p className="text-sm text-muted-foreground">{label}</p>
-          <p className="font-bold text-lg">{value}</p>
+          <p
+            className={`font-bold text-lg ${
+              typeof value === "string" && value.includes("₹")
+                ? "rupee-font"
+                : ""
+            }`}
+          >
+            {value}
+          </p>
         </div>
       </CardContent>
     </Card>
@@ -385,7 +399,9 @@ export function PackageDetailsClient({
                         alt={`${pkg.title} gallery image ${index + 1}`}
                         fill
                         className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        data-ai-hint={`${pkg.hint} ${index % 2 === 0 ? "scenery" : "activity"}`}
+                        data-ai-hint={`${pkg.hint} ${
+                          index % 2 === 0 ? "scenery" : "activity"
+                        }`}
                       />
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <span className="text-white text-sm font-medium">
@@ -426,7 +442,9 @@ export function PackageDetailsClient({
                     onClick={handleWishlistToggle}
                   >
                     <Heart
-                      className={`h-5 w-5 ${isInWishlist(pkg.id) ? "text-primary fill-current" : ""}`}
+                      className={`h-5 w-5 ${
+                        isInWishlist(pkg.id) ? "text-primary fill-current" : ""
+                      }`}
                     />
                     <span className="sr-only">Wishlist</span>
                   </Button>
@@ -443,7 +461,9 @@ export function PackageDetailsClient({
                 <StatCard
                   icon={Users}
                   label="Group Size"
-                  value={`${(pkg as any).groupSize?.min || 2}-${(pkg as any).groupSize?.max || 12} people`}
+                  value={`${(pkg as any).groupSize?.min || 2}-${
+                    (pkg as any).groupSize?.max || 12
+                  } people`}
                 />
                 <StatCard
                   icon={User}
@@ -453,7 +473,10 @@ export function PackageDetailsClient({
               </div>
 
               <div className="mb-6 rounded-lg bg-card p-6 shadow-md">
-                <h3 className="text-xl font-bold font-headline mb-4" style={{ opacity: 0.92 }}>
+                <h3
+                  className="text-xl font-bold font-headline mb-4"
+                  style={{ opacity: 0.92 }}
+                >
                   Tour Operator
                 </h3>
                 <div className="flex items-start gap-4">
@@ -656,7 +679,7 @@ export function PackageDetailsClient({
                       {
                         length: Math.min((pkg as any).groupSize?.max || 8, 12),
                       },
-                      (_, i) => i + 1,
+                      (_, i) => i + 1
                     ).map((num) => (
                       <option key={num} value={num}>
                         {num} {num === 1 ? "person" : "people"}
@@ -685,9 +708,8 @@ export function PackageDetailsClient({
                   onClick={() => setShowPayment(true)}
                 >
                   <ShieldCheck className="mr-2 h-5 w-5" />
-                  Book Now - <span className="rupee-font">₹</span>{(
-                    parseInt(pkg.price.replace(/,/g, "")) * travelers
-                  ).toLocaleString()}
+                  Book Now - <span className="rupee-font">₹</span>
+                  {parseInt(pkg.price.replace(/,/g, "")) * travelers}
                 </Button>
                 <Button
                   variant="outline"
@@ -695,7 +717,9 @@ export function PackageDetailsClient({
                   onClick={handleWishlistToggle}
                 >
                   <Heart
-                    className={`h-5 w-5 ${isInWishlist(pkg.id) ? "text-primary fill-current" : ""}`}
+                    className={`h-5 w-5 ${
+                      isInWishlist(pkg.id) ? "text-primary fill-current" : ""
+                    }`}
                   />
                 </Button>
               </div>
@@ -744,7 +768,9 @@ export function PackageDetailsClient({
               width={800}
               height={600}
               className="max-w-full max-h-full object-contain"
-              data-ai-hint={`${pkg.hint} ${currentImageIndex % 2 === 0 ? "scenery" : "activity"}`}
+              data-ai-hint={`${pkg.hint} ${
+                currentImageIndex % 2 === 0 ? "scenery" : "activity"
+              }`}
             />
 
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
@@ -763,14 +789,14 @@ export function PackageDetailsClient({
               placeholder="Name"
               className="w-full border rounded p-2"
               value={paymentName}
-              onChange={e => setPaymentName(e.target.value)}
+              onChange={(e) => setPaymentName(e.target.value)}
             />
             <input
               type="email"
               placeholder="Email"
               className="w-full border rounded p-2"
               value={paymentEmail}
-              onChange={e => setPaymentEmail(e.target.value)}
+              onChange={(e) => setPaymentEmail(e.target.value)}
             />
             <input
               type="text"
@@ -779,7 +805,14 @@ export function PackageDetailsClient({
             />
           </div>
           <DialogFooter>
-            <Button onClick={() => { setShowPayment(false); alert('Payment processed!'); }}>Pay Now</Button>
+            <Button
+              onClick={() => {
+                setShowPayment(false);
+                alert("Payment processed!");
+              }}
+            >
+              Pay Now
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
